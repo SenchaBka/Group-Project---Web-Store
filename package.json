@@ -1,9 +1,9 @@
 {
-  "name": "mern_skeleton",
+  "name": "store_app",
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
-  "author": "Blessing",
+  "author": "Slytherin Developers",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.22.5",
