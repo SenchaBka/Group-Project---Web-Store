@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Store App</title>
+        <link rel="stylesheet" href="styles.css">
+      </head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="registration.html">registration</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="index.html">Store</a></li>     
+            <li><a href="clientStoreUI.html">Add Items UI</a></li>
+          </ul>
+      </nav>
+<h2>Add Item</h2>
+
+<form id="addItemForm">
+    <label for="itemName">Item Name:</label><br>
+    <input type="text" id="itemName" name="itemName"><br>
+    <label for="itemPrice">Item Price:</label><br>
+    <input type="text" id="itemPrice" name="itemPrice"><br>
+    <input type="submit" value="Submit">
+</form>
+
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+
+<script>
+  var firebaseConfig = {
+          apiKey: "AIzaSyBcKf6SFzccs2doWObh8HZ-MO4_O8l8fws",
+          authDomain: "web-dev-c20fd.firebaseapp.com",
+          projectId: "web-dev-c20fd",
+          storageBucket: "web-dev-c20fd.appspot.com",
+          messagingSenderId: "737856138554",
+          appId: "1:737856138554:web:6b2a83f2448d60f51df403",
+          measurementId: "G-54Z13RLFGY"
+        };
+    // Existing Firebase initialization
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+
+    // Initialize Firebase Authentication
+    var auth = firebase.auth();
+
+    document.getElementById('addItemForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var user = auth.currentUser;
+        if (user) {
+            // User is signed in, allow them to add items
+            var itemName = document.getElementById('itemName').value;
+            var itemPrice = document.getElementById('itemPrice').value;
+
+            db.collection("items").add({
+                    name: itemName,
+                    price: itemPrice
+            })
+            .then((docRef) => {
+                    console.log("Document written with ID: ", docRef.id);
+            })
+            .catch((error) => {
+                    console.error("Error adding document: ", error);
+            });
+        } else {
+            // No user is signed in, prevent them from adding items
+            console.error("User not signed in");
+        }
+    });
+</script>
+
+</body>
+</html>

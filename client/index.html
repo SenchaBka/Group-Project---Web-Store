@@ -5,14 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Store App</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
   </head>
   <body>
     <nav class="navbar">
       <ul>
         <li><a href="registration.html">registration</a></li>
         <li><a href="login.html">Login</a></li>
-        <li><a href="index.html">Store</a></li>     </ul>
-    </nav>
+        <li><a href="index.html">Store</a></li>     
+        <li><a href="clientStoreUI.html">Store UI</a></li>
+      </ul>
     Welcome to Store App
+
+    <div id="itemsList"></div>
+
+    <script>
+        var firebaseConfig = {
+          apiKey: "AIzaSyBcKf6SFzccs2doWObh8HZ-MO4_O8l8fws",
+          authDomain: "web-dev-c20fd.firebaseapp.com",
+          projectId: "web-dev-c20fd",
+          storageBucket: "web-dev-c20fd.appspot.com",
+          messagingSenderId: "737856138554",
+          appId: "1:737856138554:web:6b2a83f2448d60f51df403",
+          measurementId: "G-54Z13RLFGY"
+        };
+        
+      // Existing Firebase initialization
+      firebase.initializeApp(firebaseConfig);
+      var db = firebase.firestore();
+  
+      // Select the parent element
+      var itemsList = document.getElementById('itemsList');
+  
+      // Get all documents from the "items" collection
+      db.collection("items").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          // For each document, create a new HTML element
+          var itemElement = document.createElement('p');
+          itemElement.textContent = doc.data().name + ': ' + doc.data().price;
+  
+          // Append the new element to the parent element
+          itemsList.appendChild(itemElement);
+        });
+      });
+    </script>
   </body>
 </html>
