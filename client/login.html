@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  
+
   <title>Firebase Login</title>
   <!-- Add Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -9,28 +10,29 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
   <!-- Initialize Firebase -->
   <script>
-        const firebaseConfig = {
-          apiKey: "AIzaSyBcKf6SFzccs2doWObh8HZ-MO4_O8l8fws",
-          authDomain: "web-dev-c20fd.firebaseapp.com",
-          projectId: "web-dev-c20fd",
-          storageBucket: "web-dev-c20fd.appspot.com",
-          messagingSenderId: "737856138554",
-          appId: "1:737856138554:web:6b2a83f2448d60f51df403",
-          measurementId: "G-54Z13RLFGY"
-        };
+    const firebaseConfig = {
+      apiKey: "AIzaSyAve3Kdp7vBhqt0E6BA0fWpbOSCxIqOCls",
+      authDomain: "week11-1-6c138.firebaseapp.com",
+      projectId: "week11-1-6c138",
+      storageBucket: "week11-1-6c138.appspot.com",
+      messagingSenderId: "753661187204",
+      appId: "1:753661187204:web:94e664f28ed4119a0e9ed1",
+      measurementId: "G-LK84KM2HT8"
+    };
     firebase.initializeApp(firebaseConfig);
   </script>
 </head>
+
 <body>
   <nav class="navbar">
     <ul>
       <li><a href="registration.html">registration</a></li>
       <li><a href="login.html">Login</a></li>
-      <li><a href="index.html">Store</a></li>     
+      <li><a href="index.html">Store</a></li>
       <li><a href="clientStoreUI.html">Store UI</a></li>
     </ul>
   </nav>
-  
+
   <h1>Login</h1>
   <form id="loginForm">
     <label for="email">Email:</label>
@@ -39,34 +41,35 @@
     <input type="password" id="password" name="password" required><br><br>
     <button type="submit">Login</button>
   </form>
-  
+
   <p id="message" style="display: none;"></p>
   <script>
     // Handle form submission
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
       event.preventDefault();
       var email = document.getElementById('email').value;
       var password = document.getElementById('password').value;
 
       // Sign in with Firebase
       firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(function(userCredential) {
+        .then(function (userCredential) {
           // Display a success message
           var messageElement = document.getElementById('message');
           messageElement.textContent = 'Login successful!';
           messageElement.style.display = 'block';
 
           // After 3 seconds, redirect to index.html
-          setTimeout(function() {
+          setTimeout(function () {
             window.location.href = 'index.html';
           }, 3000);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           // Handle login errors
           var messageElement = document.getElementById('message');
           messageElement.textContent = 'Error: ' + error.message;
           messageElement.style.display = 'block';
         });
     });
-    </script> 
+  </script>
+
 </html>
