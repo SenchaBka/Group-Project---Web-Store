@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Store App</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
 
-  </head>
-  <body>
-    <nav class="navbar">
-      <ul>
-        <li><a href="registration.html">registration</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="index.html">Store</a></li>     
-        <li><a href="clientStoreUI.html">Store UI</a></li>
-      </ul>
+<head>
+  <meta charset="UTF-8" />
+  <title>Store App</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
 
-  <div class="registration-box">
-    <h1>Login to the Store</h1>
-    <div id="firebaseui-auth-container"></div>
-  </div>
+</head>
 
+<body>
+  <nav class="navbar">
+    <ul>
+      <li><a href="registration.html">registration</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="index.html">Store</a></li>
+      <li><a href="clientStoreUI.html">Store UI</a></li>
+    </ul>
 
-
-
+    <div class="registration-box">
+      <h1>Login to the Store</h1>
+      <div id="firebaseui-auth-container"></div>
+    </div>
 
 
 
@@ -33,50 +31,55 @@
 
 
 
-  <!-- DO NOT FUCKING TOUCH-->
+
+
+
+
+    <!-- DO NOT FUCKING TOUCH-->
     <!-- Firebase -->
-      <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
 
-      <!-- FirebaseUI -->
-      <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-      <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <!-- FirebaseUI -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
-      <script>
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-          apiKey: "AIzaSyBcKf6SFzccs2doWObh8HZ-MO4_O8l8fws",
-          authDomain: "web-dev-c20fd.firebaseapp.com",
-          projectId: "web-dev-c20fd",
-          storageBucket: "web-dev-c20fd.appspot.com",
-          messagingSenderId: "737856138554",
-          appId: "1:737856138554:web:6b2a83f2448d60f51df403",
-          measurementId: "G-54Z13RLFGY"
-        };
+    <script>
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAve3Kdp7vBhqt0E6BA0fWpbOSCxIqOCls",
+        authDomain: "week11-1-6c138.firebaseapp.com",
+        projectId: "week11-1-6c138",
+        storageBucket: "week11-1-6c138.appspot.com",
+        messagingSenderId: "753661187204",
+        appId: "1:753661187204:web:94e664f28ed4119a0e9ed1",
+        measurementId: "G-LK84KM2HT8"
+      };
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
 
-        // Initialize FirebaseUI
-        const ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // Initialize FirebaseUI
+      const ui = new firebaseui.auth.AuthUI(firebase.auth());
 
-        ui.start('#firebaseui-auth-container', {
-          signInOptions: [
-            firebase.auth.EmailAuthProvider.PROVIDER_ID
-          ],
-          signInSuccessUrl: 'index.html'
-        });
-      </script>
+      ui.start('#firebaseui-auth-container', {
+        signInOptions: [
+          firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        signInSuccessUrl: 'index.html'
+      });
+    </script>
+
 </html>
 
 
 
 
-        <!-- Login form -->
-        <!-- BEGIN: ed8c6549bwf9 -->
-        <!-- un used code dont delete
+<!-- Login form -->
+<!-- BEGIN: ed8c6549bwf9 -->
+<!-- un used code dont delete
                 <form class="fields">
                   <div class="field">
                     <label for="email">Email:</label>
@@ -91,4 +94,4 @@
                   </div>
                 </form>
         -->
-        <!-- END: ed8c6549bwf9 -->
+<!-- END: ed8c6549bwf9 -->
