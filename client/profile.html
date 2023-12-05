@@ -41,6 +41,7 @@
     <p id="userEmail"></p>
     <input type="email" id="newEmail" placeholder="Enter new email">
     <button onclick="updateEmail()">Update Email</button>
+    <p id="emailChangeMessage"></p>
 
     <input type="password" id="oldPassword" placeholder="Enter old password">
     <input type="password" id="newPassword" placeholder="Enter new password">
@@ -93,6 +94,7 @@
         function updateEmail() {
             var user = firebase.auth().currentUser;
             var newEmail = document.getElementById('newEmail').value;
+            var messageElement = document.getElementById('emailChangeMessage');
 
             if (user) {
                 // Update the email without sending a verification email
@@ -100,9 +102,13 @@
                     // Update successful
                     console.log('Email updated successfully!');
                     document.getElementById('userEmail').textContent = 'Current Email: ' + user.email;
+                    messageElement.textContent = 'Email updated successfully!';
+                    messageElement.style.color = 'green';
                 }).catch(function (error) {
                     // An error occurred
                     console.error('Error updating email:', error.message);
+                    messageElement.textContent = 'Error updating email: ' + error.message;
+                    messageElement.style.color = 'red';
                 });
             } else {
                 console.log('No user signed in.');
