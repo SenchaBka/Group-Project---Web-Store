@@ -4,12 +4,37 @@
 <head>
 
   <title>Firebase Login</title>
-  <!-- Add Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <!-- Initialize Firebase -->
+
+</head>
+
+<body>
+  <nav class="navbar">
+    <ul>
+      <li><a href="registration.html">registration</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="index.html">Store</a></li>
+      <li><a href="clientStoreUI.html">Add Items UI</a></li>
+      <li><a href="profile.html">Profile</a></li>
+    </ul>
+  </nav>
+
+  <div class="registration-box">
+    <h1>Login to the Store</h1>
+    <div id="firebaseui-auth-container"></div>
+  </div>
+
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+
+  <!-- FirebaseUI -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
   <script>
+    // Your web app's Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyAve3Kdp7vBhqt0E6BA0fWpbOSCxIqOCls",
       authDomain: "week11-1-6c138.firebaseapp.com",
@@ -19,29 +44,22 @@
       appId: "1:753661187204:web:94e664f28ed4119a0e9ed1",
       measurementId: "G-LK84KM2HT8"
     };
+
+    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    // Initialize FirebaseUI
+    const ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+    ui.start('#firebaseui-auth-container', {
+      signInOptions: [
+        firebase.auth.EmailAuthProvider.PROVIDER_ID
+      ],
+      signInSuccessUrl: 'index.html'
+    });
+
   </script>
-</head>
-
-<body>
-  <nav class="navbar">
-    <ul>
-        <li><a href="registration.html">registration</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="index.html">Store</a></li>
-        <li><a href="clientStoreUI.html">Add Items UI</a></li>
-        <li><a href="profile.html">Profile</a></li>
-    </ul>
-</nav>
-
-  <h1>Login</h1>
-  <form id="loginForm">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br><br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br><br>
-    <button type="submit">Login</button>
-  </form>
 
   <p id="message" style="display: none;"></p>
   <script>
