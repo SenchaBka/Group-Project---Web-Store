@@ -48,6 +48,8 @@
     <button onclick="updatePassword()">Update Password</button>
     <p id="passwordChangeMessage"></p>
 
+    <button onclick="signOut()">Sign Out</button>
+
     <script>
         function updatePassword() {
             var user = firebase.auth().currentUser;
@@ -81,6 +83,20 @@
                 messageElement.style.color = 'red';
             }
         }
+
+        function signOut() {
+            firebase.auth().signOut().then(function () {
+                // User signed out successfully
+                console.log('User signed out successfully!');
+                alert('You have been signed out.');
+                window.location.href = 'login.html'; // Redirect to login page
+            }).catch(function (error) {
+                // Error signing out
+                console.error('Error signing out:', error.message);
+                alert('Error signing out: ' + error.message);
+            });
+        }
+    </script>
     </script>
     <script>
         firebase.auth().onAuthStateChanged(function (user) {
