@@ -26,12 +26,13 @@
 <body>
   <nav class="navbar">
     <ul>
-      <li><a href="registration.html">registration</a></li>
-      <li><a href="login.html">Login</a></li>
-      <li><a href="index.html">Store</a></li>
-      <li><a href="clientStoreUI.html">Store UI</a></li>
+        <li><a href="registration.html">registration</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="index.html">Store</a></li>
+        <li><a href="clientStoreUI.html">Add Items UI</a></li>
+        <li><a href="profile.html">Profile</a></li>
     </ul>
-  </nav>
+</nav>
 
   <h1>Login</h1>
   <form id="loginForm">
@@ -61,7 +62,7 @@
           // After 3 seconds, redirect to index.html
           setTimeout(function () {
             window.location.href = 'index.html';
-          }, 3000);
+          }, 1000);
         })
         .catch(function (error) {
           // Handle login errors
@@ -70,6 +71,8 @@
           messageElement.style.display = 'block';
         });
     });
+
+
   </script>
 
 </html>
