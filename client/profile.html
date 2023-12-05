@@ -41,34 +41,73 @@
     <p id="userEmail"></p>
     <input type="email" id="newEmail" placeholder="Enter new email">
     <button onclick="updateEmail()">Update Email</button>
-  
+
+    <input type="password" id="oldPassword" placeholder="Enter old password">
+    <input type="password" id="newPassword" placeholder="Enter new password">
+    <button onclick="updatePassword()">Update Password</button>
+    <p id="passwordChangeMessage"></p>
+
     <script>
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          document.getElementById('userEmail').textContent = 'Current Email: ' + user.email;
-        } else {
-          console.log('No user signed in.');
+        function updatePassword() {
+            var user = firebase.auth().currentUser;
+            var oldPassword = document.getElementById('oldPassword').value;
+            var newPassword = document.getElementById('newPassword').value;
+            var messageElement = document.getElementById('passwordChangeMessage');
+
+            if (user) {
+                // Create a credential with the user's email and old password
+                var credential = firebase.auth.EmailAuthProvider.credential(user.email, oldPassword);
+
+                // Reauthenticate the user with the old password
+                user.reauthenticateWithCredential(credential).then(function () {
+                    // Reauthentication successful, now update the password
+                    user.updatePassword(newPassword).then(function () {
+                        // Password update successful
+                        messageElement.textContent = 'Password updated successfully!';
+                        messageElement.style.color = 'green';
+                    }).catch(function (error) {
+                        // An error occurred during password update
+                        messageElement.textContent = 'Error updating password: ' + error.message;
+                        messageElement.style.color = 'red';
+                    });
+                }).catch(function (error) {
+                    // Reauthentication failed
+                    messageElement.textContent = 'Error reauthenticating user: ' + error.message;
+                    messageElement.style.color = 'red';
+                });
+            } else {
+                messageElement.textContent = 'No user signed in.';
+                messageElement.style.color = 'red';
+            }
         }
-      });
-  
-      function updateEmail() {
-        var user = firebase.auth().currentUser;
-        var newEmail = document.getElementById('newEmail').value;
-  
-        if (user) {
-          // Update the email without sending a verification email
-          user.updateEmail(newEmail).then(function() {
-            // Update successful
-            console.log('Email updated successfully!');
-            document.getElementById('userEmail').textContent = 'Current Email: ' + user.email;
-          }).catch(function(error) {
-            // An error occurred
-            console.error('Error updating email:', error.message);
-          });
-        } else {
-          console.log('No user signed in.');
+    </script>
+    <script>
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                document.getElementById('userEmail').textContent = 'Current Email: ' + user.email;
+            } else {
+                console.log('No user signed in.');
+            }
+        });
+
+        function updateEmail() {
+            var user = firebase.auth().currentUser;
+            var newEmail = document.getElementById('newEmail').value;
+
+            if (user) {
+                // Update the email without sending a verification email
+                user.updateEmail(newEmail).then(function () {
+                    // Update successful
+                    console.log('Email updated successfully!');
+                    document.getElementById('userEmail').textContent = 'Current Email: ' + user.email;
+                }).catch(function (error) {
+                    // An error occurred
+                    console.error('Error updating email:', error.message);
+                });
+            } else {
+                console.log('No user signed in.');
+            }
         }
-      }
     </script>
 </body>
 
