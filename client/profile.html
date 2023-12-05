@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Login</title>
+    <!-- Add your CSS styling here -->
+
+    <!-- Add Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <!-- Initialize Firebase -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAve3Kdp7vBhqt0E6BA0fWpbOSCxIqOCls",
+            authDomain: "week11-1-6c138.firebaseapp.com",
+            projectId: "week11-1-6c138",
+            storageBucket: "week11-1-6c138.appspot.com",
+            messagingSenderId: "753661187204",
+            appId: "1:753661187204:web:94e664f28ed4119a0e9ed1",
+            measurementId: "G-LK84KM2HT8"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="registration.html">Registration</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="index.html">Store</a></li>
+            <li><a href="clientStoreUI.html">Add Items UI</a></li>
+            <li><a href="profile.html">Profile</a></li>
+
+        </ul>
+    </nav>
+
+    <p id="userEmail"></p>
+    <input type="email" id="newEmail" placeholder="Enter new email">
+    <button onclick="updateEmail()">Update Email</button>
+  
+    <script>
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          document.getElementById('userEmail').textContent = 'Current Email: ' + user.email;
+        } else {
+          console.log('No user signed in.');
+        }
+      });
+  
+      function updateEmail() {
+        var user = firebase.auth().currentUser;
+        var newEmail = document.getElementById('newEmail').value;
+  
+        if (user) {
+          // Update the email without sending a verification email
+          user.updateEmail(newEmail).then(function() {
+            // Update successful
+            console.log('Email updated successfully!');
+            document.getElementById('userEmail').textContent = 'Current Email: ' + user.email;
+          }).catch(function(error) {
+            // An error occurred
+            console.error('Error updating email:', error.message);
+          });
+        } else {
+          console.log('No user signed in.');
+        }
+      }
+    </script>
+</body>
+
+</html>
