@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Store App</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="styles.css">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
     <!-- Add your CSS styling here -->
 
     <!-- Add Firebase SDK -->
@@ -32,118 +32,122 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="login.html">Log in</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">Store</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="clientStoreUI.html">Your products</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="profile.html">Profile</a>
-              </li>
-            </ul>
-          </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Log in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Store</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="clientStoreUI.html">Your products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">Profile</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </nav>
+    </nav>
 
-    <p id="userEmail"></p>
-    <input type="email" id="newEmail" placeholder="Enter new email">
-    <button onclick="updateEmail()">Update Email</button>
-    <p id="emailChangeMessage"></p>
+    <main>
 
-    <input type="password" id="oldPassword" placeholder="Enter old password">
-    <input type="password" id="newPassword" placeholder="Enter new password">
-    <button onclick="updatePassword()">Update Password</button>
-    <p id="passwordChangeMessage"></p>
+        <p id="userEmail"></p>
+        <input type="email" id="newEmail" placeholder="Enter new email">
+        <button onclick="updateEmail()">Update Email</button>
+        <p id="emailChangeMessage"></p>
 
-    <button onclick="signOut()">Sign Out</button>
+        <input type="password" id="oldPassword" placeholder="Enter old password">
+        <input type="password" id="newPassword" placeholder="Enter new password">
+        <button onclick="updatePassword()">Update Password</button>
+        <p id="passwordChangeMessage"></p>
 
-    <script>
-        function updatePassword() {
-            var user = firebase.auth().currentUser;
-            var oldPassword = document.getElementById('oldPassword').value;
-            var newPassword = document.getElementById('newPassword').value;
-            var messageElement = document.getElementById('passwordChangeMessage');
+        <button onclick="signOut()">Sign Out</button>
 
-            if (user) {
-                // Create a credential with the user's email and old password
-                var credential = firebase.auth.EmailAuthProvider.credential(user.email, oldPassword);
+        <script>
+            function updatePassword() {
+                var user = firebase.auth().currentUser;
+                var oldPassword = document.getElementById('oldPassword').value;
+                var newPassword = document.getElementById('newPassword').value;
+                var messageElement = document.getElementById('passwordChangeMessage');
 
-                // Reauthenticate the user with the old password
-                user.reauthenticateWithCredential(credential).then(function () {
-                    // Reauthentication successful, now update the password
-                    user.updatePassword(newPassword).then(function () {
-                        // Password update successful
-                        messageElement.textContent = 'Password updated successfully!';
-                        messageElement.style.color = 'green';
+                if (user) {
+                    // Create a credential with the user's email and old password
+                    var credential = firebase.auth.EmailAuthProvider.credential(user.email, oldPassword);
+
+                    // Reauthenticate the user with the old password
+                    user.reauthenticateWithCredential(credential).then(function () {
+                        // Reauthentication successful, now update the password
+                        user.updatePassword(newPassword).then(function () {
+                            // Password update successful
+                            messageElement.textContent = 'Password updated successfully!';
+                            messageElement.style.color = 'green';
+                        }).catch(function (error) {
+                            // An error occurred during password update
+                            messageElement.textContent = 'Error updating password: ' + error.message;
+                            messageElement.style.color = 'red';
+                        });
                     }).catch(function (error) {
-                        // An error occurred during password update
-                        messageElement.textContent = 'Error updating password: ' + error.message;
+                        // Reauthentication failed
+                        messageElement.textContent = 'Error reauthenticating user: ' + error.message;
                         messageElement.style.color = 'red';
                     });
-                }).catch(function (error) {
-                    // Reauthentication failed
-                    messageElement.textContent = 'Error reauthenticating user: ' + error.message;
+                } else {
+                    messageElement.textContent = 'No user signed in.';
                     messageElement.style.color = 'red';
+                }
+            }
+
+            function signOut() {
+                firebase.auth().signOut().then(function () {
+                    // User signed out successfully
+                    console.log('User signed out successfully!');
+                    alert('You have been signed out.');
+                    window.location.href = 'login.html'; // Redirect to login page
+                }).catch(function (error) {
+                    // Error signing out
+                    console.error('Error signing out:', error.message);
+                    alert('Error signing out: ' + error.message);
                 });
-            } else {
-                messageElement.textContent = 'No user signed in.';
-                messageElement.style.color = 'red';
             }
-        }
-
-        function signOut() {
-            firebase.auth().signOut().then(function () {
-                // User signed out successfully
-                console.log('User signed out successfully!');
-                alert('You have been signed out.');
-                window.location.href = 'login.html'; // Redirect to login page
-            }).catch(function (error) {
-                // Error signing out
-                console.error('Error signing out:', error.message);
-                alert('Error signing out: ' + error.message);
-            });
-        }
-    </script>
-    </script>
-    <script>
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user) {
-                document.getElementById('userEmail').textContent = 'Current Email: ' + user.email;
-            } else {
-                console.log('No user signed in.');
-            }
-        });
-
-        function updateEmail() {
-            var user = firebase.auth().currentUser;
-            var newEmail = document.getElementById('newEmail').value;
-            var messageElement = document.getElementById('emailChangeMessage');
-
-            if (user) {
-                // Update the email without sending a verification email
-                user.updateEmail(newEmail).then(function () {
-                    // Update successful
-                    console.log('Email updated successfully!');
+        </script>
+        </script>
+        <script>
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
                     document.getElementById('userEmail').textContent = 'Current Email: ' + user.email;
-                    messageElement.textContent = 'Email updated successfully!';
-                    messageElement.style.color = 'green';
-                }).catch(function (error) {
-                    // An error occurred
-                    console.error('Error updating email:', error.message);
-                    messageElement.textContent = 'Error updating email: ' + error.message;
-                    messageElement.style.color = 'red';
-                });
-            } else {
-                console.log('No user signed in.');
+                } else {
+                    console.log('No user signed in.');
+                }
+            });
+
+            function updateEmail() {
+                var user = firebase.auth().currentUser;
+                var newEmail = document.getElementById('newEmail').value;
+                var messageElement = document.getElementById('emailChangeMessage');
+
+                if (user) {
+                    // Update the email without sending a verification email
+                    user.updateEmail(newEmail).then(function () {
+                        // Update successful
+                        console.log('Email updated successfully!');
+                        document.getElementById('userEmail').textContent = 'Current Email: ' + user.email;
+                        messageElement.textContent = 'Email updated successfully!';
+                        messageElement.style.color = 'green';
+                    }).catch(function (error) {
+                        // An error occurred
+                        console.error('Error updating email:', error.message);
+                        messageElement.textContent = 'Error updating email: ' + error.message;
+                        messageElement.style.color = 'red';
+                    });
+                } else {
+                    console.log('No user signed in.');
+                }
             }
-        }
-    </script>
+        </script>
+
+    </main>
 </body>
 
 </html>
