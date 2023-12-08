@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { signIn } from "./firebase";
-import Navigation from "../components/nav"
+import Navigation from "../components/Navigation"
+import { Link } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -11,7 +12,6 @@ const Login = () => {
         setEmail("");
         setPassword("");
         const res = await signIn(email, password);
-        if (res.error) seterror(res.error);
     };
     return (
         <>
@@ -35,6 +35,9 @@ const Login = () => {
                 />
                 <input type="submit" value="submit" />
             </form>
+            <p>
+                Not registered? <Link to="/signup">Sign up</Link>
+            </p>
         </>
     );
 };

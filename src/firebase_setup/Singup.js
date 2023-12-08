@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { signUp } from "./firebase";
+import Navigation from "../components/Navigation"
+
 const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -15,11 +17,12 @@ const Signup = () => {
             setPassword("");
             setPassword2("");
             const res = await signUp(email, password);
-            if (res.error) setError(res.error);
         }
     };
     return (
         <>
+            <Navigation />
+            <p id="message" style={{ display: 'none' }}></p>
             <h2>Sign Up</h2>
             <div>
                 {error ? <div>{error}</div> : null}
