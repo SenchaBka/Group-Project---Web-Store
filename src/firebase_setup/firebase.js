@@ -184,4 +184,20 @@ async function showUserItems() {
 }
 
 
-export { app, auth, signUp, signIn, signOut, changeEmail, changePassword, addNewItem, showUserItems };
+async function showAllItems() {
+    var itemsList = document.getElementById('items-list');
+    itemsList.innerHTML = ""; // Clear existing items in the list
+    var user = auth.currentUser;
+
+    if (user) {
+        const querySnapshot = await getDocs(collection(db, "items"));
+        querySnapshot.forEach((doc) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = doc.data().name + " - " + doc.data().description + ' - ' + doc.data().price + "$";
+    
+            itemsList.appendChild(listItem);
+        });
+    }
+}
+
+export { app, auth, signUp, signIn, signOut, changeEmail, changePassword, addNewItem, showUserItems, showAllItems };
