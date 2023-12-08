@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, addDoc, collection } from 'firebase/firestore';
+import { getFirestore, doc, addDoc, setDoc, collection, getDocs, query, where} from 'firebase/firestore';
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -10,7 +10,6 @@ import {
     EmailAuthProvider,
     updatePassword
 } from 'firebase/auth';
-import { useState } from 'react';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAve3Kdp7vBhqt0E6BA0fWpbOSCxIqOCls",
@@ -25,6 +24,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
 const auth = getAuth(app);
 
 const signUp = async (email, password) => {
@@ -138,4 +138,34 @@ async function changePassword(currentPassword, newPassword) {
     }
 }
 
-export { app, auth, signUp, signIn, signOut, changeEmail, changePassword };
+async function addNewItem(itemName, itemDesc, itemPrice) {
+    var messageElement = document.getElementById('itemAddMessage');
+    var itemName = document.getElementById('itemName').value;
+    var itemDesc = document.getElementById('itemDesc').value;
+    var itemPrice = document.getElementById('itemPrice').value;
+
+    var user = auth.currentUser;
+    if (user) {
+        try {
+            await setDoc(doc(db, "items", itemName), {
+                name: itemName,
+                price: itemPrice,
+                description: itemDesc,
+                userId: user.uid
+            })
+
+            messageElement.textContent = 'Item added successfully!';
+            messageElement.style.color = 'green';
+        } catch (error) {
+            messageElement.textContent = 'Error adding item: ' + error.message;
+            messageElement.style.color = 'red';
+        }
+
+    } else {
+        messageElement.textContent = 'You have to log in';
+        messageElement.style.color = 'red';
+    }
+}
+
+
+export { app, auth, signUp, signIn, signOut, changeEmail, changePassword, addNewItem };
