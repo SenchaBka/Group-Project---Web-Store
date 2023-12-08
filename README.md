@@ -3,11 +3,12 @@
 ## Group project for Centennial College Course COMP-229 
 
 ## To start the application
-cd client --> npm install --> yarn dev
+npm install --> yarn start
 
 ## Technologies being used 
 
+React
+Firebase
 HTML 
 CSS 
 JS 
-Firebase
