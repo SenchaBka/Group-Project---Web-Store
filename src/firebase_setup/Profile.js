@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Navigation from '../components/Navigation';
-import { auth, changeEmail } from './firebase';
+import { auth, changeEmail, changePassword } from './firebase';
 
 const Profile = () => {
   const [newEmail, setNewEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [error, setError] = useState('');
   const [currentEmail, setCurrentEmail] = useState('');
 
@@ -31,6 +32,11 @@ const Profile = () => {
       <input type="password" id="currentPassword" placeholder="Enter your password" required />
       <button onClick={() => changeEmail(newEmail, password, setCurrentEmail)}>Update Email</button>
       <p id="emailChangeMessage"></p>
+
+      <input type="password" id="password" placeholder="Enter current password" required />
+      <input type="password" id="newPassword" placeholder="Enter new password" required />
+      <button onClick={() => changePassword(password, newPassword)}>Update Password</button>
+      <p id="passwordChangeMessage"></p>
     </>
   );
 };

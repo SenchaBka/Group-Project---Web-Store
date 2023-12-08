@@ -7,7 +7,8 @@ import {
     signOut as firebaseSignout,
     updateEmail,
     reauthenticateWithCredential,
-    EmailAuthProvider
+    EmailAuthProvider,
+    updatePassword
 } from 'firebase/auth';
 import { useState } from 'react';
 
@@ -85,7 +86,6 @@ async function changeEmail(newEmail, password, setCurrentEmail) {
     var newEmail = document.getElementById('newEmail').value;
     var password = document.getElementById('currentPassword').value;
     var messageElement = document.getElementById('emailChangeMessage');
-    var userEmail = document.getElementById('userEmail');
 
     if (user) {
         try {
@@ -110,4 +110,32 @@ async function changeEmail(newEmail, password, setCurrentEmail) {
     }
 }
 
-export { app, auth, signUp, signIn, signOut, changeEmail };
+async function changePassword(currentPassword, newPassword) {
+    var user = auth.currentUser;
+    var newPassword = document.getElementById('newPassword').value;
+    var currentPassword = document.getElementById('password').value;
+    var messageElement = document.getElementById('passwordChangeMessage');
+
+    if (user) {
+        try {
+            // Reauthenticate the user with their current password
+            const credential = EmailAuthProvider.credential(user.email, currentPassword);
+            await reauthenticateWithCredential(user, credential);
+
+            // Update the email in the user profile
+            await updatePassword(user, newPassword);
+
+            messageElement.textContent = 'Password updated successfully!';
+            messageElement.style.color = 'green';
+
+        } catch (error) {
+            messageElement.textContent = 'Error updating password: ' + error.message;
+            messageElement.style.color = 'red';
+        }
+    } else {
+        messageElement.textContent = "You need to log in";
+        messageElement.style.color = 'red';
+    }
+}
+
+export { app, auth, signUp, signIn, signOut, changeEmail, changePassword };
