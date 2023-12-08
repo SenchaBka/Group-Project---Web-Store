@@ -29,7 +29,7 @@ const Profile = () => {
       <p id="userEmail"></p>
       <input type="email" id="newEmail" placeholder="Enter new email" required />
       <input type="password" id="currentPassword" placeholder="Enter your password" required />
-      <button onClick={() => changeEmail(newEmail, password)}>Update Email</button>
+      <button onClick={() => changeEmail(newEmail, password, setCurrentEmail)}>Update Email</button>
       <p id="emailChangeMessage"></p>
     </>
   );

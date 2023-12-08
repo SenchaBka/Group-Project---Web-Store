@@ -9,6 +9,7 @@ import {
     reauthenticateWithCredential,
     EmailAuthProvider
 } from 'firebase/auth';
+import { useState } from 'react';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAve3Kdp7vBhqt0E6BA0fWpbOSCxIqOCls",
@@ -79,11 +80,12 @@ const signOut = async () => {
 };
 
 
-async function changeEmail(newEmail, password) {
+async function changeEmail(newEmail, password, setCurrentEmail) {
     var user = auth.currentUser;
     var newEmail = document.getElementById('newEmail').value;
     var password = document.getElementById('currentPassword').value;
     var messageElement = document.getElementById('emailChangeMessage');
+    var userEmail = document.getElementById('userEmail');
 
     if (user) {
         try {
@@ -93,6 +95,7 @@ async function changeEmail(newEmail, password) {
 
             // Update the email in the user profile
             await updateEmail(user, newEmail);
+            setCurrentEmail(newEmail);
 
             messageElement.textContent = 'Email updated successfully!';
             messageElement.style.color = 'green';
