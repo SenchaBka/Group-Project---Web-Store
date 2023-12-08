@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./firebase_setup/Signin";
 import Profile from "./firebase_setup/Profile";
+import Signup from "./firebase_setup/Singup";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
@@ -13,6 +14,7 @@ root.render(
             <Routes>
                 <Route path="/" element={<App />} />
                 <Route path="login" element={<Login />} />
+                <Route path="signup" element={<Signup />} />
                 <Route path="profile" element={<Profile />} />
             </Routes>
         </BrowserRouter>
