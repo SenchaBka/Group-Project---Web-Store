@@ -167,5 +167,21 @@ async function addNewItem(itemName, itemDesc, itemPrice) {
     }
 }
 
+async function showUserItems() {
+    var itemsList = document.getElementById('items-list');
+    itemsList.innerHTML = ""; // Clear existing items in the list
+    var user = auth.currentUser;
 
-export { app, auth, signUp, signIn, signOut, changeEmail, changePassword, addNewItem };
+    if (user) {
+        const querySnapshot = await getDocs(query(collection(db, "items"), where("userId", "==", user.uid)));
+        querySnapshot.forEach((doc) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = doc.data().name + " - " + doc.data().description + ' - ' + doc.data().price + "$";
+    
+            itemsList.appendChild(listItem);
+        });
+    }
+}
+
+
+export { app, auth, signUp, signIn, signOut, changeEmail, changePassword, addNewItem, showUserItems };

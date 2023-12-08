@@ -54,6 +54,9 @@ const Profile = () => {
         <button onClick={() => addNewItem(itemName, itemDesc, itemPrice)}>Add Item</button>
         <p id="itemAddMessage"></p>
 
+        <h2>Your Products:</h2>
+        <ul id="items-list"></ul>
+        <button onClick={() => showUserItems(password, newPassword)}>Show your products</button>
       </body>
     </>
   );
