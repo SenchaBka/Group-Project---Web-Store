@@ -5,14 +5,9 @@
 ## To start the application
 npm install --> yarn start
 
-## Technologies being used 
+## Technologies being 
 
-React
-Firebase
-HTML 
-CSS 
-JS 
-![My Tools](https://skillicons.dev/icons?i=html,css,javascript,react,nodejs,expressjs,mongodb,vscode,java,,git,vscode)u
+![My Tools](https://skillicons.dev/icons?i=html,css,javascript,react,nodejs,expressjs,mongodb,vscode,java,,git,vscode)
 
 
 ## Team Members
