@@ -174,8 +174,8 @@ async function addNewItem(itemName, itemDesc, itemPrice) {
 }
 
 async function showAllItems() {
-    var itemsList = document.getElementById('items-list');
-    itemsList.innerHTML = ""; // Clear existing items in the list
+    var allItemsList = document.getElementById('all-items-list');
+    allItemsList.innerHTML = ""; // Clear existing items in the list
     var user = auth.currentUser;
 
     if (user) {
@@ -184,13 +184,13 @@ async function showAllItems() {
             const listItem = document.createElement('li');
             listItem.textContent = doc.data().name + " - " + doc.data().description + ' - ' + doc.data().price + "$";
 
-            itemsList.appendChild(listItem);
+            allItemsList.appendChild(listItem);
         });
     }
     else{
         const listItem = document.createElement('li');
         listItem.textContent = "You have to Sign in/Sign up to see the products";
-        itemsList.appendChild(listItem);
+        allItemsList.appendChild(listItem);
     }
 }
 
