@@ -10,7 +10,7 @@ npm install --> yarn start
 ![My Tools](https://skillicons.dev/icons?i=html,css,javascript,react,nodejs,expressjs,mongodb,vscode,git)
 
 
-## Team Members
+## Team Members:
 
 Achint Rekhi     - Front-End Developer  <br>
 Arsenii Buriak   - UX/UI Developer  <br>
