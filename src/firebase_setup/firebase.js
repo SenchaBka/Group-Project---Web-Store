@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, addDoc, setDoc, collection, getDocs, query, where} from 'firebase/firestore';
+import { getFirestore, doc, addDoc, setDoc, collection, getDocs, query, where, deleteDoc, updateDoc } from 'firebase/firestore';
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -71,6 +71,8 @@ const signIn = async (email, password) => {
         messageElement.style.display = 'block';
     }
 };
+
+
 const signOut = async () => {
     try {
         await firebaseSignout(auth);
@@ -167,23 +169,6 @@ async function addNewItem(itemName, itemDesc, itemPrice) {
     }
 }
 
-async function showUserItems() {
-    var itemsList = document.getElementById('items-list');
-    itemsList.innerHTML = ""; // Clear existing items in the list
-    var user = auth.currentUser;
-
-    if (user) {
-        const querySnapshot = await getDocs(query(collection(db, "items"), where("userId", "==", user.uid)));
-        querySnapshot.forEach((doc) => {
-            const listItem = document.createElement('li');
-            listItem.textContent = doc.data().name + " - " + doc.data().description + ' - ' + doc.data().price + "$";
-    
-            itemsList.appendChild(listItem);
-        });
-    }
-}
-
-
 async function showAllItems() {
     var itemsList = document.getElementById('items-list');
     itemsList.innerHTML = ""; // Clear existing items in the list
@@ -194,10 +179,96 @@ async function showAllItems() {
         querySnapshot.forEach((doc) => {
             const listItem = document.createElement('li');
             listItem.textContent = doc.data().name + " - " + doc.data().description + ' - ' + doc.data().price + "$";
-    
+
             itemsList.appendChild(listItem);
         });
     }
 }
 
-export { app, auth, signUp, signIn, signOut, changeEmail, changePassword, addNewItem, showUserItems, showAllItems };
+
+async function showUserItems() {
+    var itemsList = document.getElementById('items-list');
+    itemsList.innerHTML = ""; // Clear existing items in the list
+    var user = auth.currentUser;
+
+    if (user) {
+        const querySnapshot = await getDocs(query(collection(db, "items"), where("userId", "==", user.uid)));
+        querySnapshot.forEach((doc) => {
+
+            const listItem = document.createElement('li');
+            listItem.textContent = doc.data().name + " - " + doc.data().description + ' - ' + doc.data().price + "$";
+            itemsList.appendChild(listItem);
+
+            // Add an edit button for each item
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.addEventListener('click', () => showEditForm(doc.id));
+
+            // Add a delete button for each item
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => deleteItem(doc.id));
+
+            //listItem.appendChild(editButton);
+            listItem.appendChild(deleteButton);
+            listItem.appendChild(editButton);
+        });
+    }
+}
+
+async function deleteItem(itemId) {
+    var itemsList = document.getElementById('items-list');
+    try {
+        await deleteDoc(doc(db, "items", itemId));
+        showUserItems();
+        itemsList.append("Item deleted successfully");
+    } catch (error) {
+        itemsList.append("Error deleting item:", error.message);
+    }
+}
+
+async function showEditForm(itemId){
+    var editForm = document.getElementById('editItemForm');
+    editForm.style.display = 'block';
+    document.getElementById("addItemForm").style.display = "none";
+
+    var updateButton = document.createElement('button');
+    updateButton.textContent = "Edit item"
+    updateButton.addEventListener('click', function() {
+        updateItem(itemId);
+    });
+    editForm.appendChild(updateButton);
+}
+
+async function updateItem(itemId) {
+    var editForm = document.getElementById('editItemForm');
+    var itemsList = document.getElementById('items-list');
+
+    // Correctly access form elements by their IDs
+    var itemName = document.getElementById('editItemName').value;
+    var itemDesc = document.getElementById('editItemDesc').value;
+    var itemPrice = document.getElementById('editItemPrice').value;
+
+    try {
+        await updateDoc(doc(db, "items", itemId), {
+            name: itemName,
+            description: itemDesc,
+            price: itemPrice,
+        });
+
+        editForm.style.display = 'none';
+        document.getElementById("addItemForm").style.display = "block";
+        showUserItems();
+
+        var messageElement = document.createElement('p');
+        messageElement.textContent = "Item updated successfully";
+        itemsList.appendChild(messageElement);
+
+    } catch (error) {
+        var messageElement = document.createElement('p');
+        messageElement.textContent = "Error updating item: " + error.message;
+        itemsList.appendChild(messageElement);
+    }
+}
+
+export { app, auth, signUp, signIn, signOut, changeEmail, changePassword, addNewItem, showUserItems, showAllItems, updateItem };
