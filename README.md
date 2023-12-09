@@ -12,9 +12,9 @@ npm install --> yarn start
 
 ## Team Members
 
-Achint Rekhi     - Front-End Developer
-Arsenii Buriak   - UX/UI Developer
-Honesty Werinwo  - Project Manager
-João Marques     - Back-End Developer
-Yousif Al-Bayati - Data Analyst
-Sachi Reyes      - Quality Assurance/Tester
+Achint Rekhi     - Front-End Developer  <br>
+Arsenii Buriak   - UX/UI Developer  <br>
+Honesty Werinwo  - Project Manager <br>
+João Marques     - Back-End Developer <br>
+Yousif Al-Bayati - Data Analyst <br>
+Sachi Reyes      - Quality Assurance/Tester <br>
