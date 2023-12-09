@@ -10,6 +10,7 @@ import {
     EmailAuthProvider,
     updatePassword
 } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAve3Kdp7vBhqt0E6BA0fWpbOSCxIqOCls",
@@ -36,6 +37,7 @@ const signUp = async (email, password) => {
         );
         const user = userCredential.user;
         await addDoc(collection(db, "users"), { uid: user.uid, email: user.email });
+
         var messageElement = document.getElementById('message');
         messageElement.textContent = 'Login successful!';
         messageElement.style.display = 'block';
@@ -107,7 +109,7 @@ async function changeEmail(newEmail, password, setCurrentEmail) {
             messageElement.style.color = 'red';
         }
     } else {
-        messageElement.textContent = "You need to log in";
+        messageElement.textContent = "You have to log in";
         messageElement.style.color = 'red';
     }
 }
@@ -184,6 +186,11 @@ async function showAllItems() {
 
             itemsList.appendChild(listItem);
         });
+    }
+    else{
+        const listItem = document.createElement('li');
+        listItem.textContent = "You have to Sign in/Sign up to see the products";
+        itemsList.appendChild(listItem);
     }
 }
 
