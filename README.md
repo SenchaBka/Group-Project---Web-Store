@@ -12,3 +12,14 @@ Firebase
 HTML 
 CSS 
 JS 
+![My Tools](https://skillicons.dev/icons?i=html,css,javascript,react,nodejs,expressjs,mongodb,vscode,java,,git,vscode)u
+
+
+## Team Members
+
+Achint Rekhi     - Front-End Developer
+Arsenii Buriak   - UX/UI Developer
+Honesty Werinwo  - Project Manager
+João Marques     - Back-End Developer
+Yousif Al-Bayati - Data Analyst
+Sachi Reyes      - Quality Assurance/Tester
