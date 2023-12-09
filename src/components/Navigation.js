@@ -1,4 +1,3 @@
-// Navigation file
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -10,7 +9,7 @@ const Navigation = () => {
           <Link to="/login">Log in</Link>
         </li>
         <li>
-          <Link to="/store">Store</Link>
+          <Link to="/">Store</Link>
         </li>
         <li>
           <Link to="/products">Your products</Link>
