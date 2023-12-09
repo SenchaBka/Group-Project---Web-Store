@@ -158,6 +158,8 @@ async function addNewItem(itemName, itemDesc, itemPrice) {
 
             messageElement.textContent = 'Item added successfully!';
             messageElement.style.color = 'green';
+
+            showUserItems();
         } catch (error) {
             messageElement.textContent = 'Error adding item: ' + error.message;
             messageElement.style.color = 'red';
