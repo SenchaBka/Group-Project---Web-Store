@@ -23,7 +23,7 @@ const Login = () => {
     };
 
     return (
-        <>
+        <><body id='signIn'>
             {error ? <div>{error}</div> : null}
             <Navigation />
             <p id="message" style={{ display: 'none' }}></p>
@@ -47,6 +47,7 @@ const Login = () => {
             <p>
                 Not registered? <Link to="/signup">Sign up</Link>
             </p>
+        </body>
         </>
     );
 };
