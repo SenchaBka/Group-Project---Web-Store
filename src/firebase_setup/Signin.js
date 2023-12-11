@@ -26,8 +26,8 @@ const Login = () => {
         <><body id='signIn'>
             {error ? <div>{error}</div> : null}
             <Navigation />
-            <p id="message" style={{ display: 'none' }}></p>
             <form onSubmit={handleSubmit}>
+                <h2>Sign in</h2>
                 <input
                     type="text"
                     name="email"
@@ -42,11 +42,12 @@ const Login = () => {
                     placeholder="Your Password"
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <input type="submit" value="submit" />
+                <p id="message" style={{ display: 'none' }}></p>
+                <input type="submit" value="Submit" />
+                <p>
+                    Not registered? <Link to="/signup">Sign up</Link>
+                </p>
             </form>
-            <p>
-                Not registered? <Link to="/signup">Sign up</Link>
-            </p>
         </body>
         </>
     );
