@@ -50,9 +50,10 @@ form {
   text-align: center;
 }
 
-h2 {
+h1, h2 {
   color: #333;
   font-size: 30px;
+  text-align: center;
 }
 
 form label {
@@ -151,3 +152,71 @@ form p{
   font-size: 20px;
 }
 
+/*Products page*/
+#productsPage{
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+section {
+  width: 30%;
+  margin: auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  color: #555;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+#items-list, #cart-list {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#items-list li, #cart-list li {
+  font-size: 20px;
+  width: 50%;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+}
+
+#viewProducts, #viewCart{
+  background-color: #e07d00;
+  margin: auto;
+  text-align: center;
+}

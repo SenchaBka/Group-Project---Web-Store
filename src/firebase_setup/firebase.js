@@ -225,15 +225,20 @@ async function showUserItems() {
             const editButton = document.createElement('button');
             editButton.textContent = 'Edit';
             editButton.addEventListener('click', () => showEditForm(doc.id));
+            editButton.style.padding = '10px';
+            editButton.style.margin = '5px';
 
             // Add a delete button for each item
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
             deleteButton.addEventListener('click', () => deleteItem(doc.id));
+            deleteButton.style.backgroundColor = 'red';
+            deleteButton.style.padding = '10px';
+            deleteButton.style.margin = '5px';
 
             //listItem.appendChild(editButton);
-            listItem.appendChild(deleteButton);
             listItem.appendChild(editButton);
+            listItem.appendChild(deleteButton);
         });
     }
 }
