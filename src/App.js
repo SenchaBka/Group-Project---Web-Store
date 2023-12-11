@@ -6,12 +6,15 @@ function App() {
 
   return (<>
     <Navigation />
-    <h1>Web Store App</h1>
-    <button onClick={() => showAllItems()}>See all products</button>
-    <div id='all-items-list'>
-      
-    </div>
-    </>
+    <main id='store'>
+      <h1>Web Store App</h1>
+      <button id='showAll' onClick={() => showAllItems()}>See all products</button>
+      <p id='addToCartMessage'></p>
+      <div id='all-items-list'>
+
+      </div>
+    </main>
+  </>
   );
 }
 

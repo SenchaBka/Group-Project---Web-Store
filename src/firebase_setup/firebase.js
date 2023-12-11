@@ -185,15 +185,19 @@ async function showAllItems() {
         const querySnapshot = await getDocs(collection(db, "items"));
         querySnapshot.forEach((doc) => {
             const listItem = document.createElement('li');
-            listItem.textContent = doc.data().name + " - " + doc.data().description + ' - ' + doc.data().price + "$";
 
             // Add a cart button for each item
             const cartButton = document.createElement('button');
-            cartButton.textContent = 'Add to Cart';
+            cartButton.classList.add('addToCartButton');
             cartButton.addEventListener('click', () => addToCart(doc.id));
+            listItem.appendChild(cartButton);
+
+            const itemDetails = document.createElement('p');
+            itemDetails.textContent = doc.data().name + " - " + doc.data().description + ' - ' + doc.data().price + "$";
+            itemDetails.classList.add('itemDetails');
+            listItem.appendChild(itemDetails);
 
             allItemsList.appendChild(listItem);
-            allItemsList.appendChild(cartButton);
         });
     }
     else {
