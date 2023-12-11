@@ -28,6 +28,8 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 const signUp = async (email, password) => {
+    var messageElement = document.getElementById('message');
+
     try {
         const userCredential = await createUserWithEmailAndPassword(
             auth,
@@ -37,21 +39,23 @@ const signUp = async (email, password) => {
         const user = userCredential.user;
         await addDoc(collection(db, "users"), { uid: user.uid, email: user.email });
 
-        var messageElement = document.getElementById('message');
         messageElement.textContent = 'Login successful!';
         messageElement.style.display = 'block';
+        messageElement.style.color = 'green';
 
         return true;
     } catch (error) {
         // Handle login errors
-        var messageElement = document.getElementById('message');
         messageElement.textContent = 'Error: ' + error.message;
         messageElement.style.display = 'block';
+        messageElement.style.color = 'red';
     }
 };
 
 
 const signIn = async (email, password) => {
+    var messageElement = document.getElementById('message');
+
     try {
         const userCredential = await signInWithEmailAndPassword(
             auth,
@@ -60,7 +64,6 @@ const signIn = async (email, password) => {
         );
         const user = userCredential.user;
 
-        var messageElement = document.getElementById('message');
         messageElement.textContent = 'Login successful!';
         messageElement.style.display = 'block';
         messageElement.style.color = 'green';
@@ -68,7 +71,6 @@ const signIn = async (email, password) => {
         return true;
     } catch (error) {
         // Handle login errors
-        var messageElement = document.getElementById('message');
         messageElement.textContent = 'Error: ' + error.message;
         messageElement.style.display = 'block';
         messageElement.style.color = 'red';

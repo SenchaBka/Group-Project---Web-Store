@@ -28,11 +28,9 @@ const Signup = () => {
     return (
         <>
             <Navigation />
-            <p id="message" style={{ display: 'none' }}></p>
-            <h2>Sign Up</h2>
             <div>
-                {error ? <div>{error}</div> : null}
                 <form onSubmit={handleSubmit}>
+                    <h2>Sign Up</h2>
                     <input
                         type="email"
                         name="email"
@@ -57,11 +55,14 @@ const Signup = () => {
                         required
                         onChange={(e) => setPassword2(e.target.value)}
                     />
-                    <button type="submit">Submit</button>
+                    <p id="message" style={{ display: 'none' }}>
+                    </p>
+                    {error ? <div style={{color: 'red'}}>{error}</div> : null}
+                    <input type="submit" value="Submit" />
+                    <p>
+                        Already registered? <Link to="/login">Login</Link>
+                    </p>
                 </form>
-                <p>
-                    Already registered? <Link to="/login">Login</Link>
-                </p>
             </div>
         </>
     );
