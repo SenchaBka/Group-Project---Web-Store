@@ -21,7 +21,7 @@ const Profile = () => {
   const handleLogout = async () => {
     var userEmail = document.getElementById('userEmail');
     var messageElement = document.getElementById('signOutMessage');
-    
+
     try {
       await auth.signOut();
       userEmail.textContent = "Not logged in";
@@ -37,14 +37,14 @@ const Profile = () => {
 
   return (
     <>
-      <body>
-        <Navigation />
+      <Navigation />
+      <body id='profilePage'>
         <h1>Profile</h1>
         <p id='userEmail'>Current Email: {currentEmail}</p>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <input type="email" id="newEmail" placeholder="Enter new email" required />
         <input type="password" id="currentPassword" placeholder="Enter your password" required />
-        <button onClick={() => changeEmail(newEmail, password)}>Update Email</button>
+        <button onClick={() => changeEmail(newEmail, password, setCurrentEmail)}>Update Email</button>
         <p id="emailChangeMessage"></p>
 
         <input type="password" id="password" placeholder="Enter current password" required />
@@ -52,7 +52,7 @@ const Profile = () => {
         <button onClick={() => changePassword(password, newPassword)}>Update Password</button>
         <p id="passwordChangeMessage"></p>
 
-        <button onClick={() => handleLogout(setCurrentEmail)}>Sign Out</button>
+        <button id='signOutButton' onClick={() => handleLogout(setCurrentEmail)}>Sign Out</button>
         <p id="signOutMessage"></p>
       </body>
     </>

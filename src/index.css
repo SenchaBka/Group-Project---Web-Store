@@ -220,3 +220,14 @@ ul {
   margin: auto;
   text-align: center;
 }
+
+/*Profile Page*/
+#profilePage{
+  width: 20%;
+  margin: auto;
+  text-align: center;
+}
+
+#signOutButton{
+  background-color: darkred;
+}
