@@ -39,21 +39,23 @@ const Profile = () => {
     <>
       <Navigation />
       <body id='profilePage'>
-        <h1>Profile</h1>
-        <p id='userEmail'>Current Email: {currentEmail}</p>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <input type="email" id="newEmail" placeholder="Enter new email" required />
-        <input type="password" id="currentPassword" placeholder="Enter your password" required />
-        <button onClick={() => changeEmail(newEmail, password, setCurrentEmail)}>Update Email</button>
-        <p id="emailChangeMessage"></p>
+        <h1>Your Profile</h1>
+        <main>
+          <p id='userEmail'>Current Email: {currentEmail}</p>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <input type="email" id="newEmail" placeholder="Enter new email" required />
+          <input type="password" id="currentPassword" placeholder="Enter your password" required />
+          <button onClick={() => changeEmail(newEmail, password, setCurrentEmail)}>Update Email</button>
+          <p id="emailChangeMessage"></p>
 
-        <input type="password" id="password" placeholder="Enter current password" required />
-        <input type="password" id="newPassword" placeholder="Enter new password" required />
-        <button onClick={() => changePassword(password, newPassword)}>Update Password</button>
-        <p id="passwordChangeMessage"></p>
+          <input type="password" id="password" placeholder="Enter current password" required />
+          <input type="password" id="newPassword" placeholder="Enter new password" required />
+          <button onClick={() => changePassword(password, newPassword)}>Update Password</button>
+          <p id="passwordChangeMessage"></p>
 
-        <button id='signOutButton' onClick={() => handleLogout(setCurrentEmail)}>Sign Out</button>
-        <p id="signOutMessage"></p>
+          <button id='signOutButton' onClick={() => handleLogout(setCurrentEmail)}>Sign Out</button>
+          <p id="signOutMessage"></p>
+        </main>
       </body>
     </>
   );
