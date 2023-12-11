@@ -23,32 +23,33 @@ const Login = () => {
     };
 
     return (
-        <><body id='signIn'>
-            {error ? <div>{error}</div> : null}
-            <Navigation />
-            <form onSubmit={handleSubmit}>
-                <h2>Sign in</h2>
-                <input
-                    type="text"
-                    name="email"
-                    value={email}
-                    placeholder="Your Email"
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    name="password"
-                    value={password}
-                    placeholder="Your Password"
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <p id="message" style={{ display: 'none' }}></p>
-                <input type="submit" value="Submit" />
-                <p>
-                    Not registered? <Link to="/signup">Sign up</Link>
-                </p>
-            </form>
-        </body>
+        <>
+            <body id='signIn'>
+                <Navigation />
+                <form onSubmit={handleSubmit}>
+                    <h2>Sign in</h2>
+                    <input
+                        type="text"
+                        name="email"
+                        value={email}
+                        placeholder="Your Email"
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        value={password}
+                        placeholder="Your Password"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <p id="message" style={{ display: 'none' }}></p>
+                    {error ? <div style={{color: 'red'}}>{error}</div> : null}
+                    <input type="submit" value="Submit" />
+                    <p>
+                        Not registered? <Link to="/signup">Sign up</Link>
+                    </p>
+                </form>
+            </body>
         </>
     );
 };
